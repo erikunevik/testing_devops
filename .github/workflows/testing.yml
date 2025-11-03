@@ -23,6 +23,8 @@ jobs:
           echo "$GREETING $TARGET"
           echo "Kör pytest..."
       - name: Run tests
+        env:
+          PYTHONPATH: ${{ github.workspace }}   # <-- Lägg till denna rad
         run: pytest -q
 
   build:
