@@ -6,14 +6,42 @@ on:
     
 jobs:
 
-  create-image:
+  create-and-push:
 
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
     - name: Build the Docker image
+    - uses: MaximilianoBz/dockerhub-buildpush@v1.1
+      with:
+          registry_url: docker.io
+          repository_name: erik_test_docker
+          user_name: ${{ secrets.anv }}
+          password: ${{ secrets.losenord }}
+          image_version: latest
+
+          docker_file: .
+
+          
+
+    
       run: |
         docker build -f dockerfile2 -t hello-world:1.0 .
+        
+
+
+      steps:
+      - uses: actions/checkout@v4
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag hello-world:latest --tag hello-world:1.5
+      - name: Build the Docker image
+     
+    
+      # Image Build Version
+          
+      # Docker File Directory, Default Current Directory (.)
+      
+      
 
      
