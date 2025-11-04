@@ -8,4 +8,4 @@ WORKDIR /app
 COPY 04112025/helloworldapp.py .
 
 
-CMD ["python", "helloworldapp.py"]
+CMD ["python", "helloworldapp.py"]z
