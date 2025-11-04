@@ -18,8 +18,8 @@ jobs:
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.anv }}
-          password: ${{ secrets.losenord }}
+          username: ${{ secrets.ANV }}
+          password: ${{ secrets.LOSENORD }}
 
       - name: Build and push to Docker Hub
         uses: docker/build-push-action@v6
