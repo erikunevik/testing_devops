@@ -1,0 +1,18 @@
+name: Uppgift 1
+
+on:
+  workflow_dispatch:
+    inputs:
+      user_name:
+        description: "Ange ditt namn"
+        required: true
+        default: "Okänd användare"
+
+jobs:
+  show-input:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Visa användarens input
+        run: echo "Tack ${{ github.event.inputs.user_name }} för ditt bidrag!"
+
+
