@@ -1,26 +1,53 @@
-name: Uppgift 1
+name: Labb_DE24_Needs//test/build/deploy
 
 on:
   workflow_dispatch:
     inputs:
       user_name:
-        description: "Ange ditt namn"
-        default: "Okänd användare"
+        description: "Ange om pytest skallköras ja/nej. Om nej så utförs inte testet och applikationen byggs ej"
 
 jobs:
-  jobs-for-main-user:
-    if: ${{ github.event.inputs.user_name == 'erik' }}
+ ja:
+    if: ${{ github.event.inputs.user_name == 'ja' }}
     runs-on: ubuntu-latest
     steps:
-      - name: Visa användarens input
-        run: echo "hej erik!"
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install pytest
+        run: pip install pytest
+      - name: Run pytest
+        run: pytest -q
 
-  jobs-for-other-user:
-    if: ${{ github.event.inputs.user_name != 'erik' }}
+ build:
+    needs: ja
     runs-on: ubuntu-latest
     steps:
-      - name: Visa användarens input
-        run: echo "hej gäst!"
+      - name: Build
+        run: echo "Bygger applikationen..."
+
+ deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: deploy
+        run: echo "Deployar applikationen"
+
+ nej:
+   if: always()
+   runs-on: ubuntu-latest
+   steps:
+     - name: terminate
+       run: echo "Programmet avslutas"
+
+
+ 
+
+ 
+
+      
+    
 
 
 
